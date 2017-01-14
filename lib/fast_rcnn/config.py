@@ -138,7 +138,7 @@ __C.TEST = edict()
 __C.TEST.SCALES = (600,)
 
 # Resize test images so that its width and height are multiples of ...
-__C.TEST.SCALE_MULTIPLE_OF = 1
+__C.TEST.SCALE_MULTIPLE_OF = 32
 
 # Max pixel size of the longest side of a scaled input image
 __C.TEST.MAX_SIZE = 1000
