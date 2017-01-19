@@ -63,29 +63,29 @@ def detect_core(net, im_file):
     NMS_THRESH = 0.3
     all_detect_objects = []
     for cls_ind, cls in enumerate(CLASSES[1:]):
-	cls_ind += 1 # because we skipped background
-	cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
-	cls_scores = scores[:, cls_ind]
-	dets = np.hstack((cls_boxes,
-	                  cls_scores[:, np.newaxis])).astype(np.float32)
-	keep = nms(dets, NMS_THRESH)
-	dets = dets[keep, :]
-	inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
-	print ('There are {:d} {:s} SKU'.format(len(inds),cls))
-	if len(inds) == 0:
-	    continue
-	for i in inds:
-		bbox = dets[i, :4]
-		score = dets[i, -1]
-		detect_object = {
-		    'class_name':cls,
-		    'score':float(score),
-		    'xmin':int(bbox[0]),
-		    'ymin':int(bbox[1]),
-		    'xmax':int(bbox[2]),
-		    'ymax':int(bbox[3])
-		}
-		all_detect_objects.append(detect_object)
+        cls_ind += 1 # because we skipped background
+        cls_boxes = boxes[:, 4*cls_ind:4*(cls_ind + 1)]
+        cls_scores = scores[:, cls_ind]
+        dets = np.hstack((cls_boxes,
+                          cls_scores[:, np.newaxis])).astype(np.float32)
+        keep = nms(dets, NMS_THRESH)
+        dets = dets[keep, :]
+        inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
+        print ('There are {:d} {:s} SKU'.format(len(inds),cls))
+        if len(inds) == 0:
+            continue
+        for i in inds:
+            bbox = dets[i, :4]
+            score = dets[i, -1]
+            detect_object = {
+                'class_name':cls,
+                'score':float(score),
+                'xmin':int(bbox[0]),
+                'ymin':int(bbox[1]),
+                'xmax':int(bbox[2]),
+                'ymax':int(bbox[3])
+            }
+            all_detect_objects.append(detect_object)
 
     return all_detect_objects
     
@@ -103,7 +103,7 @@ def api(path):
 	                      
 
     if not os.path.isfile(caffemodel):
-	raise IOError(('{:s} not found.\nDid you run ./data/script/'
+        raise IOError(('{:s} not found.\nDid you run ./data/script/'
 	               'fetch_faster_rcnn_models.sh?').format(caffemodel))
 
     caffe.set_mode_gpu()
@@ -114,13 +114,13 @@ def api(path):
     print '\n\nLoaded network {:s}'.format(caffemodel)
 
     # timers
-    _t = {'im_preproc': Timer(), 'im_net' : Timer(), 'im_postproc': Timer(), 'misc' : Timer()}
+    # _t = {'im_preproc': Timer(), 'im_net' : Timer(), 'im_postproc': Timer(), 'misc' : Timer()}
 
     # Warmup on a dummy image
-    im = 128 * np.ones((300, 500, 3), dtype=np.uint8)
-    for i in xrange(2):
-	_, _= im_detect(net, im, _t)
-   
+    # im = 128 * np.ones((300, 500, 3), dtype=np.uint8)
+    # for i in xrange(2):
+    #     _, _= im_detect(net, im, _t)
+    #
     all_detect_objects = detect_core(net, path)
 
     timer.toc()
