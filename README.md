@@ -3,7 +3,7 @@ by Sanghoon Hong, Byungseok Roh, Kye-hyeon Kim, Yeongjae Cheon, Minje Park (Inte
 Presented in [EMDNN2016](http://allenai.org/plato/emdnn/), a NIPS2016 workshop ([arXiv link](https://arxiv.org/abs/1611.08588))
 
 ### Introduction
-
+    
 This repository is a fork from [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn) and demonstrates the performance of PVANet.
 
 You can refer to [py-faster-rcnn README.md](https://github.com/rbgirshick/py-faster-rcnn/blob/master/README.md) and [faster-rcnn README.md](https://github.com/ShaoqingRen/faster_rcnn/blob/master/README.md) for more information.
@@ -119,6 +119,6 @@ If you want to cite this work in your publication:
 | Input size | Top-1 error (%) | Top-5 error (%) |
 | --- | --- | --- |
 | 192x192 | 30.00 | N/A |
-| 224x224 | 27.66 | 8.84 |
+| 224x224 | 27.66 | 8.84 | 
 - We re-trained a 224x224 model from the '192x192' model as a base model.
 
